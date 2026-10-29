@@ -74,3 +74,55 @@ body { margin: 0; background: #0A1020; }
 /* ---------- TEST PAGE (temporary) ---------- */
 .hello { margin: 16px 0 0; font-size: clamp(48px, 7.5vw, 100px); line-height: 0.95; letter-spacing: -0.05em; font-weight: 800; }
 .card { margin: 28px 0; padding: 24px; border-radius: 24px; max-width: 420px; }
+
+/* ---------- BLOBS ---------- */
+.night { --blob1: #2B5BD7; --blob2: #6D4AFF; --blob3: #0EA5E9; }
+.day { --blob1: #8FB4FF; --blob2: #C4B5FD; --blob3: #7DD3FC; }
+.blobs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: drift 18s ease-in-out infinite alternate; }
+.b1 { top: -140px; right: -120px; width: 620px; height: 620px; background: var(--blob1); opacity: 0.35; }
+.b2 { bottom: -180px; left: -160px; width: 560px; height: 560px; background: var(--blob2); opacity: 0.28; animation-delay: -6s; }
+.b3 { top: 40%; left: 45%; width: 380px; height: 380px; background: var(--blob3); opacity: 0.16; animation-delay: -12s; }
+@keyframes drift { to { transform: translate(60px, 40px) scale(1.1); } }
+
+.page { position: relative; z-index: 1; padding-bottom: 140px; }
+
+/* ---------- TOP BAR ---------- */
+.topbar { position: sticky; top: 12px; z-index: 20; max-width: 1240px; margin: 12px auto 0; padding: 0 12px; }
+.topbar-inner { display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 999px; box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18); }
+.logo { flex: none; min-height: 44px; padding: 0 14px; border: none; background: none; color: var(--text); font-family: 'Unbounded', sans-serif; font-size: 16px; font-weight: 800; cursor: pointer; }
+.tabs { flex: 1; min-width: 0; display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: none; min-height: 44px; padding: 0 14px; border: none; border-radius: 999px; background: transparent; color: var(--text); font: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer; transition: background 0.25s, color 0.25s; }
+.tab:hover { background: var(--glass); }
+.tab.on { background: var(--acc); color: var(--on-acc); }
+.icon-btn { flex: none; width: 44px; height: 44px; border: none; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: var(--text); }
+
+/* ---------- BOTTOM BAR ---------- */
+.bottombar { position: fixed; left: 50%; bottom: 14px; z-index: 30; transform: translateX(-50%); width: min(560px, calc(100% - 24px)); display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 999px; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3); }
+.bottombar .now { flex: 1; text-align: center; }
+.btn-acc { background: var(--acc); color: var(--on-acc); }
+.btn:disabled { opacity: 0.45; cursor: default; transform: none; }
+
+/* ---------- HOME ---------- */
+.section-title { margin: 64px 0 0; font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.04em; }
+.section-title .es { margin-left: 10px; font-size: 24px; letter-spacing: 0; }
+.tiles { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px; }
+.tile { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 22px; border: none; border-radius: 28px; color: var(--text); font: inherit; text-align: left; cursor: pointer; transition: transform 0.3s cubic-bezier(0.2, 1.2, 0.4, 1); }
+.tile:hover { transform: translateY(-6px); }
+.tile-title { margin-top: 10px; font-size: 20px; font-weight: 700; }
+.tile-es { font-size: 19px; }
+.tile-hook { margin-top: 8px; color: var(--mute); font-size: 14px; }
+
+/* ---------- ROOMS ---------- */
+.room-title { margin: 10px 0 0; font-size: clamp(36px, 5.5vw, 68px); line-height: 1; letter-spacing: -0.045em; font-weight: 800; }
+.room-title .es { font-size: 0.5em; letter-spacing: 0; }
+
+/* ---------- ROOM ENTRANCE ---------- */
+.page > * { animation: enter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes enter { from { opacity: 0; transform: translateY(28px); } }
+
+/* Respect people who turn animations off in their settings */
+@media (prefers-reduced-motion: reduce) {
+  .blob, .page > * { animation: none; }
+}

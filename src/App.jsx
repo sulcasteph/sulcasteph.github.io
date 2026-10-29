@@ -1,7 +1,27 @@
 import { useState } from 'react'
+import Blobs from './components/Blobs'
+import TopBar from './components/TopBar'
+import BottomBar from './components/BottomBar'
+import Home from './rooms/Home'
+import RoomPlaceholder from './rooms/RoomPlaceholder'
 
 export default function App() {
   const [theme, setTheme] = useState('night')
+  const [screen, setScreen] = useState('home')
+  const [history, setHistory] = useState([])
+
+  function go(id) {
+    if (id === screen) return
+    setHistory([...history, screen])
+    setScreen(id)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function back() {
+    if (history.length === 0) return
+    setScreen(history[history.length - 1])
+    setHistory(history.slice(0, -1))
+  }
 
   function toggleTheme() {
     setTheme(theme === 'night' ? 'day' : 'night')
@@ -9,19 +29,14 @@ export default function App() {
 
   return (
     <div className={`app ${theme}`}>
-      <main className="page">
-        <p className="lbl">STEPH OS · BUILD 001</p>
-        <h1 className="disp hello">
-          Hi, I'm <span className="gold">Steph.</span>
-        </h1>
-        <p className="es">hola, soy steph · bienvenidos</p>
+      <Blobs />
+      <TopBar screen={screen} go={go} theme={theme} toggleTheme={toggleTheme} />
 
-        <div className="glass card">This is a glass card.</div>
-
-        <button className="btn btn-neu" onClick={toggleTheme}>
-          Switch to {theme === 'night' ? 'day' : 'night'}
-        </button>
+      <main className="page" key={screen}>
+        {screen === 'home' ? <Home go={go} /> : <RoomPlaceholder id={screen} />}
       </main>
+
+      <BottomBar canGoBack={history.length > 0} back={back} go={go} />
     </div>
   )
 }
