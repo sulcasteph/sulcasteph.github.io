@@ -1,12 +1,11 @@
 import { ROOMS } from '../data/rooms'
 
+import Intro from '../components/Intro'
+
 export default function Home({ go }) {
   return (
     <section>
-      <p className="lbl">STEPH OS · HOME</p>
-      <h1 className="disp hello">Hi, I'm <span className="gold">Steph.</span></h1>
-      <p className="es">hola, soy steph · bienvenidos</p>
-
+      <Intro go={go} />
       <h2 className="disp section-title">
         Pick a room <span className="es">elige un cuarto</span>
       </h2>

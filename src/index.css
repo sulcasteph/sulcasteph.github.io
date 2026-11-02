@@ -52,8 +52,8 @@ body { margin: 0; background: #0A1020; }
 /* ---------- SURFACES ---------- */
 .glass {
   background: var(--glass);
-  backdrop-filter: blur(22px) saturate(160%);
   -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
   border: 1px solid var(--glass-b);
 }
 .neu { background: var(--surf); box-shadow: 10px 10px 22px var(--sh-d), -10px -10px 22px var(--sh-l); }
@@ -125,4 +125,34 @@ body { margin: 0; background: #0A1020; }
 /* Respect people who turn animations off in their settings */
 @media (prefers-reduced-motion: reduce) {
   .blob, .page > * { animation: none; }
+}
+
+/* ---------- INTRO ---------- */
+.hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: start; }
+.intro-text { margin: 24px 0 0; max-width: 34em; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5; }
+.intro-open { margin: 14px 0 0; color: var(--mute); font-size: 15px; }
+.hero-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-links { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.hero-links a { padding: 8px 0; color: var(--acc); font-weight: 600; text-underline-offset: 4px; }
+
+.id-card { padding: 18px; border-radius: 32px; }
+.voice { display: flex; gap: 4px; }
+.facts { margin: 18px 0 0; }
+.fact { padding: 14px 8px; border-top: 1px solid var(--glass-b); }
+.fact dd { margin: 6px 0 0; font-size: 16px; line-height: 1.45; }
+
+.rack { margin-top: 24px; padding: 10px 24px; border-radius: 28px; }
+.unit { display: grid; grid-template-columns: 12px 170px minmax(0, 1fr) 260px; gap: 20px; align-items: start; padding: 22px 0; }
+.unit + .unit { border-top: 1px solid var(--glass-b); }
+.led { width: 10px; height: 10px; margin-top: 9px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); }
+.unit-verb { margin: 0; font-size: 22px; font-weight: 700; }
+.unit-es { font-size: 19px; }
+.unit-proof { margin: 0; max-width: 60ch; font-size: 16px; line-height: 1.5; }
+.unit-tools { margin: 0; line-height: 1.7; letter-spacing: 0.04em; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; }
+  .unit { grid-template-columns: 12px 1fr; gap: 6px 14px; }
+  .unit-proof, .unit-tools { grid-column: 2; }
+  .unit-tools { margin-top: 6px; }
 }
